@@ -12,15 +12,21 @@ public class Actor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long actorId;
 
+    private Long tmdbId;
+
     @Column(nullable = false)
     private String name;
 
-    private Date birthDate;
     private String biography;
+
     private String photo;
+
+    private Double popularity;
 
     @ManyToMany(mappedBy = "actors")
     private List<Movie> movies;
 
+    // Getters and Setters
 }
+
 
