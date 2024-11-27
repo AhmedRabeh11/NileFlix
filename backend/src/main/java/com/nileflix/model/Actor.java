@@ -2,11 +2,19 @@ package com.nileflix.model;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
 public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +34,6 @@ public class Actor {
     @ManyToMany(mappedBy = "actors")
     private List<Movie> movies;
 
-    // Getters and Setters
 }
 
 
