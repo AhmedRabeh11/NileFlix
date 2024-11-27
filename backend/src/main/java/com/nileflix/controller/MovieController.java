@@ -8,12 +8,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/api/movies")
+@CrossOrigin(origins = "*")
 public class MovieController {
 
     @Autowired
     private MovieService movieService;
+
+    @GetMapping("/featured")
+    public List<Movie> getFeaturedMovies() {
+        return movieService.getFeaturedMovies();
+    }
 
     @GetMapping
     public List<Movie> getAllMovies() {
@@ -24,10 +31,6 @@ public class MovieController {
     public Optional<Movie> getMovieById(@PathVariable Long id) {
         return movieService.getMovieById(id);
     }
-
-    @GetMapping("/search")
-    public List<Movie> searchMovies(@RequestParam String title) {
-        return movieService.searchMovies(title);
-    }
 }
+
 
