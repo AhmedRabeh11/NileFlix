@@ -51,6 +51,30 @@ public class TMDBService {
     }
 
 
+    public List<Trailer> fetchAndStoreTrailers(Long tmdbId) {
+        String url = apiUrl + "/movie/" + tmdbId + "/videos?api_key=" + apiKey;
+        RestTemplate restTemplate = new RestTemplate();
+        TMDBVideoResponse response = restTemplate.getForObject(url, TMDBVideoResponse.class);
+
+        if (response != null && response.getResults() != null) {
+            List<Trailer> trailers = response.getResults().stream()
+                    .filter(video -> "Trailer".equalsIgnoreCase(video.getType())) // Only fetch trailers
+                    .map(videoData -> {
+                        Trailer trailer = new Trailer();
+                        trailer.setKey(videoData.getKey());
+                        trailer.setSite(videoData.getSite());
+                        trailer.setType(videoData.getType());
+                        return trailer;
+                    }).collect(Collectors.toList());
+
+            return trailers;
+        }
+
+        return List.of();
+    }
+
+
+
     public String fetchAndStoreEgyptianMovies() {
         if (movieRepository.count() > 0) {
             return "Movies already exist in the database. Fetch skipped.";
@@ -97,6 +121,11 @@ public class TMDBService {
                 // Fetch and set actors for this movie
                 List<Actor> actors = fetchAndStoreActors(movie.getTmdbId());
                 movie.setActors(actors);
+
+                // Fetch and set trailers for this movie
+                List<Trailer> trailers = fetchAndStoreTrailers(movie.getTmdbId());
+                movie.setTrailers(trailers);
+
 
                 return movie;
             }).collect(Collectors.toList());
