@@ -4,7 +4,7 @@ import com.nileflix.dto.*;
 import com.nileflix.model.*;
 import com.nileflix.repository.*;
 import org.springframework.beans.factory.annotation.*;
-*import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
