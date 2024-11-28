@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.List;
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
+@Entity
 public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

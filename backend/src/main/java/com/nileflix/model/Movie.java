@@ -10,12 +10,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
+@Entity
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,4 +48,11 @@ public class Movie {
 
     private String productionCountries;
 
+    @ManyToMany
+    @JoinTable(
+            name = "movie_actor",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
+    private List<Actor> actors; // Add this field to reference the actors
 }

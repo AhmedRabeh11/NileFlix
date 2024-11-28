@@ -4,13 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4416c703-3a5c-4190-a29b-67e05a8efc89" name="Changes" comment="Added ActorRepository, modified all movies layers">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/dto/TMDBMovieResponse.java" afterDir="false" />
+    <list default="true" id="4416c703-3a5c-4190-a29b-67e05a8efc89" name="Changes" comment="Added TMDBResponse dto">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/controller/TMDBController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/service/TMDBService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/dto/TMDBMovieResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/dto/TMDBMovieResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/model/Actor.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/model/Actor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/model/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/model/Movie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/model/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/model/Review.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/model/Trailer.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/model/Trailer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/reviews/NileFlixApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/NileFlixApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +76,11 @@
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.nileflix" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -136,7 +146,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732722977525</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added TMDBResponse dto">
+      <option name="closed" value="true" />
+      <created>1732723393831</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1732723393831</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -147,6 +165,7 @@
     <MESSAGE value="Updated the Movie, Actor Entity Fields" />
     <MESSAGE value="Added Trailer Entity" />
     <MESSAGE value="Added ActorRepository, modified all movies layers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added ActorRepository, modified all movies layers" />
+    <MESSAGE value="Added TMDBResponse dto" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added TMDBResponse dto" />
   </component>
 </project>
