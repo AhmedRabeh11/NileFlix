@@ -5,16 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4416c703-3a5c-4190-a29b-67e05a8efc89" name="Changes" comment="Added TMDBResponse dto">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/controller/TMDBController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/service/TMDBService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/dto/TMDBCreditsResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/dto/TMDBMovieResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/dto/TMDBMovieResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/model/Actor.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/model/Actor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/controller/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/controller/ReviewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/model/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/model/Movie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/model/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/model/Review.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/model/Trailer.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/model/Trailer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/reviews/NileFlixApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/NileFlixApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/repository/ReviewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/repository/ReviewRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/service/ReviewService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/service/TMDBService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/nileflix/service/TMDBService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,16 +65,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.NileFlixApplication.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Projects/demo/demo",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.NileFlixApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/demo/demo&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.nileflix" />

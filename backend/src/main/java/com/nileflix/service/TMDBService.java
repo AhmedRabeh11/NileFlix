@@ -1,11 +1,10 @@
 package com.nileflix.service;
 
-import com.nileflix.dto.TMDBMovieResponse;
-import com.nileflix.model.Movie;
-import com.nileflix.repository.MovieRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import com.nileflix.dto.*;
+import com.nileflix.model.*;
+import com.nileflix.repository.*;
+import org.springframework.beans.factory.annotation.*;
+*import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
@@ -26,6 +25,32 @@ public class TMDBService {
     @Autowired
     private MovieRepository movieRepository;
 
+
+    public List<Actor> fetchAndStoreActors(Long tmdbId) {
+        String url = apiUrl + "/movie/" + tmdbId + "/credits?api_key=" + apiKey;
+        RestTemplate restTemplate = new RestTemplate();
+        TMDBCreditsResponse response = restTemplate.getForObject(url, TMDBCreditsResponse.class);
+
+        if (response != null && response.getCast() != null) {
+            List<Actor> actors = response.getCast().stream().map(actorData -> {
+                Actor actor = new Actor();
+                actor.setTmdbId(actorData.getId());
+                actor.setName(actorData.getName());
+                actor.setPhoto(actorData.getProfilePath() != null
+                        ? "https://image.tmdb.org/t/p/w500" + actorData.getProfilePath()
+                        : null);
+                actor.setPopularity(actorData.getPopularity());
+                return actor;
+            }).collect(Collectors.toList());
+
+            // Save actors and return the list
+            return actors;
+        }
+
+        return List.of(); // Return empty list if no cast is found
+    }
+
+
     public String fetchAndStoreEgyptianMovies() {
         if (movieRepository.count() > 0) {
             return "Movies already exist in the database. Fetch skipped.";
@@ -42,10 +67,17 @@ public class TMDBService {
                 movie.setTmdbId(movieData.getId());
                 movie.setTitle(movieData.getTitle());
                 movie.setOverview(movieData.getOverview());
-                /*movie.setReleaseDate(movieData.getReleaseDate() != null
-                        ? java.sql.Date.valueOf(movieData.getReleaseDate())
-                        : new java.sql.Date(System.currentTimeMillis())); // Default to today's date*/
-
+                if (movieData.getReleaseDate() != null && !movieData.getReleaseDate().isEmpty()) {
+                    try {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        movie.setReleaseDate(new java.sql.Date(sdf.parse(movieData.getReleaseDate()).getTime()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        movie.setReleaseDate(new java.sql.Date(System.currentTimeMillis())); // Fallback to today's date
+                    }
+                } else {
+                    movie.setReleaseDate(new java.sql.Date(System.currentTimeMillis())); // Default to today's date
+                }
                 movie.setRating(movieData.getRating() != null
                         ? BigDecimal.valueOf(movieData.getRating())
                         : BigDecimal.ZERO);
@@ -61,6 +93,11 @@ public class TMDBService {
                         .map(String::valueOf)
                         .collect(Collectors.joining(", "))
                         : null);
+
+                // Fetch and set actors for this movie
+                List<Actor> actors = fetchAndStoreActors(movie.getTmdbId());
+                movie.setActors(actors);
+
                 return movie;
             }).collect(Collectors.toList());
 

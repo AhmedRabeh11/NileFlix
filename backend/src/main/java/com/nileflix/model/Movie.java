@@ -30,10 +30,6 @@ public class Movie {
 
     private Date releaseDate;
 
-    private Integer runtime;
-
-    private String originalLanguage;
-
     private String genres;
 
     private String posterImage;
@@ -44,15 +40,14 @@ public class Movie {
 
     private Double popularity;
 
-    private String productionCompanies;
-
-    private String productionCountries;
-
     @ManyToMany
     @JoinTable(
             name = "movie_actor",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "actor_id")
     )
-    private List<Actor> actors; // Add this field to reference the actors
+    private List<Actor> actors;
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    private List<Trailer> trailers;
 }

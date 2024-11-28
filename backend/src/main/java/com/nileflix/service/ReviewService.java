@@ -5,20 +5,22 @@ import com.nileflix.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
+import java.util.*;
 
 @Service
 public class ReviewService {
-
     @Autowired
     private ReviewRepository reviewRepository;
 
     public List<Review> getReviewsByMovieId(Long movieId) {
-        return reviewRepository.findByMovieMovieId(movieId);
+        return reviewRepository.findByMovieId(movieId);
     }
 
-    public Review saveReview(Review review) {
+    public Review addReview(Review review) {
+        review.setCreatedAt(new Date());
         return reviewRepository.save(review);
     }
 }
+
 

@@ -14,17 +14,15 @@ import lombok.NoArgsConstructor;
 public class Trailer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long trailerId;
+    private Long id;
 
-    private String videoKey;
-
-    private String videoType;
-
-    private String site;
+    private String key; // Video key for embedding
+    private String site; // YouTube, etc.
+    private String type; // Trailer, Teaser, etc.
 
     @ManyToOne
-    @JoinColumn(name = "movie_id", nullable = false)
+    @JoinColumn(name = "movie_id")
     private Movie movie;
-
 }
+
 

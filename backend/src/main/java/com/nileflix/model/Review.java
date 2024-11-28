@@ -17,15 +17,20 @@ import java.util.Date;
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reviewId;
+    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "movie_id", nullable = false)
-    private Movie movie;
+    private String author;
+
+    private String content;
+
+    private Date createdAt;
 
     private Integer rating;
-    private String comment;
-    private Date reviewDate;
 
+
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 }
+
 
