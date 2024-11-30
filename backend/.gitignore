@@ -31,7 +31,26 @@ build/
 
 ### VS Code ###
 .vscode/
+.idea/
 
-### ENV Files ###
-.env
-.env.example
+
+# Ignore application properties
+src/main/resources/application.properties
+src/main/resources/application.yml
+
+
+# Ignore compiled class files
+*.class
+
+# Ignore logs
+*.log
+
+# Ignore build directories
+/target/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+
+
