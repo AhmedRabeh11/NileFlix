@@ -1,0 +1,19 @@
+/* src/component/MovieList.css */
+
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the gap between movie cards as needed */
+    justify-content: center; /* Center the movie cards horizontally */
+}
+
+.movie-card {
+    flex: 1 1 200px; /* Adjust the width of the movie cards as needed */
+    max-width: 200px; /* Ensure the movie cards do not exceed a certain width */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+    transform: translateY(-10px); /* Lift the card on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Add a shadow on hover */
+}

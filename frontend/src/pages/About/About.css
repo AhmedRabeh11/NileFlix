@@ -1,0 +1,55 @@
+/* src/pages/About.css */
+.about-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-container h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.about-container p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.mission, .team, .contact {
+    margin-bottom: 40px;
+}
+
+.team-members {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.team-member {
+    text-align: center;
+    flex: 1 1 calc(50% - 20px); /* Adjust the width as needed */
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.team-member h4 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.contact ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contact li {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}

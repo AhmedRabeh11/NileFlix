@@ -1,0 +1,54 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the home container takes up the full height of the viewport */
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: url('/src/assets/images/egypt-pyramid-filter-pyramids-of-giza-wallpaper-preview.jpg') no-repeat center center fixed; /* Add background image */
+    background-size: cover; /* Ensure the background image covers the entire page */
+    color: #fff; /* Change text color to white for better contrast */
+}
+
+.top-title, .featured-title {
+    font-size: 2.5em;
+    color: #ffcc00; /* Change color for the header */
+    margin-bottom: 26px;
+    text-align: center;
+}
+
+.movie-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    flex-grow: 0.3; /* Ensure the movie grid takes up the remaining space */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .top-title {
+        font-size: 2em;
+    }
+
+    .movie-card {
+        flex: 1 1 calc(50% - 20px);
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .top-title, .featured-title {
+        font-size: 1.5em;
+    }
+
+    .movie-card {
+        flex: 1 1 calc(100% - 20px);
+        max-width: calc(100% - 20px);
+    }
+}

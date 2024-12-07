@@ -1,0 +1,82 @@
+.movie-card {
+    background-color: #fff; /* Light background color */
+    border-radius: 10px; /* Set a fixed border-radius */
+    padding: 1rem;
+    color: #333; /* Dark text color */
+    text-align: center;
+    position: relative;
+    margin: auto;
+    overflow: hidden; /* Ensures zoom effect doesn't expand outside card */
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    flex: 1 1 calc(33.333% - 20px); /* Adjust the width of the movie cards as needed */
+    max-width: calc(33.333% - 20px); /* Ensure the movie cards do not exceed a certain width */
+    height: 500px; /* Set a fixed height for the movie card */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Image Style with Hover Zoom */
+.movie-card-image {
+    width: 100%;
+    height: 300px; /* Set a fixed height for the image */
+    object-fit: cover; /* Ensure the image covers the entire area */
+    border-radius: 10px;
+    transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+.movie-card:hover .movie-card-image {
+    transform: scale(1.1); /* Scale the image to 110% on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Adds a shadow to the image */
+}
+
+/* Card Content */
+.movie-card-content {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.movie-card-title {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: #333; /* Dark text color */
+}
+
+/* Rating Section */
+.movie-card-rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* Buttons with Fixed Colors */
+.trailer-button, .watchlist-button {
+    background: none;
+    border: none;
+    color: #007bff; /* Blue button color */
+    cursor: pointer;
+    transition: color 0.3s ease;
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.trailer-button:hover, .watchlist-button:hover {
+    color: #0056b3; /* Darker blue color on hover */
+}
+
+.watchlist-button {
+    color: #ff6347; /* Tomato button color */
+}
+
+.watchlist-button:hover {
+    color: #e5533d; /* Darker tomato color on hover */
+}
