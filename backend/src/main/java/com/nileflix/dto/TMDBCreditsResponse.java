@@ -53,6 +53,7 @@ public class TMDBCreditsResponse {
         @JsonProperty("popularity")
         private Double popularity;
 
+        @JsonProperty("biography")
+        private String biography; // Add biography field
     }
 }
-

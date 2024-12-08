@@ -17,12 +17,23 @@ public class TMDBMovieResponse {
     @JsonProperty("results")
     private List<MovieData> results;
 
+    @JsonProperty("total_pages")
+    private int totalPages;
+
     public List<MovieData> getResults() {
         return results;
     }
 
     public void setResults(List<MovieData> results) {
         this.results = results;
+    }
+
+    public int getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
     }
 
     @AllArgsConstructor
@@ -49,13 +60,15 @@ public class TMDBMovieResponse {
         private String posterPath;
 
         @JsonProperty("backdrop_path")
-        private String backdropPath; // Add this field for backdrop image
+        private String backdropPath;
 
         @JsonProperty("popularity")
-        private Double popularity; // Add this field for popularity score
+        private Double popularity;
 
         @JsonProperty("genre_ids")
         private List<Integer> genreIds;
 
+        @JsonProperty("runtime")
+        private Integer runtime; // Add runtime field
     }
 }

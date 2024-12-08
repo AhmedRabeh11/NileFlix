@@ -1,5 +1,6 @@
 package com.nileflix.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,9 +17,10 @@ import java.util.List;
 @Data
 @Entity
 public class Movie {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long movieId;
 
     private Long tmdbId;
 
@@ -40,14 +42,18 @@ public class Movie {
 
     private Double popularity;
 
-    @ManyToMany
+    private Integer runtime; // duration of the movie in minutes
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "movie_actor",
-            joinColumns = @JoinColumn(name = "movie_id"),
+            joinColumns = @JoinColumn(name = "movieId"),
             inverseJoinColumns = @JoinColumn(name = "actor_id")
     )
+    @JsonManagedReference
     private List<Actor> actors;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Trailer> trailers;
 }

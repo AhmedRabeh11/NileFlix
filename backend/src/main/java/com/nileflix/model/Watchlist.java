@@ -1,6 +1,5 @@
 package com.nileflix.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,19 +11,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 @Entity
-public class Trailer {
+public class Watchlist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String key; // Video key for embedding
-    private String site; // YouTube, etc.
-    private String type; // Trailer, Teaser, etc.
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "movieId")
-    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "movieId", referencedColumnName = "movieId")
     private Movie movie;
+
+    private String userId; // Assuming you have user management
 }
-
-
