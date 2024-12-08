@@ -5,6 +5,7 @@ html, body {
 }
 
 .home {
+    position: relative;
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Ensure the home container takes up the full height of the viewport */
@@ -15,19 +16,39 @@ html, body {
     color: #fff; /* Change text color to white for better contrast */
 }
 
+.home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with 50% transparency */
+    z-index: 1;
+}
+
+.home-content {
+    position: relative;
+    z-index: 2;
+    color: white; /* Ensure text is readable */
+    padding: 20px;
+    text-align: center;
+}
+
 .top-title, .featured-title {
     font-size: 2.5em;
-    color: #ffcc00; /* Change color for the header */
+    color: #ffcc00; /* Bright yellow color for the header */
     margin-bottom: 26px;
     text-align: center;
+    position: relative;
+    z-index: 3; /* Ensure titles are above the overlay */
 }
 
 .movie-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
     justify-content: center;
-    flex-grow: 0.3; /* Ensure the movie grid takes up the remaining space */
+    z-index: 2; /* Ensure movie grid is above the overlay */
 }
 
 /* Media Queries */

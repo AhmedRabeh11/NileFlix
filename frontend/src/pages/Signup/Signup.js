@@ -1,10 +1,9 @@
-// src/pages/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../../services/api';
-import './Login.css';
+import { registerUser } from '../../services/api';
+import './Signup.css';
 
-const Login = () => {
+const Signup = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -12,18 +11,17 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const token = await loginUser(username, password);
-            localStorage.setItem('token', token);
-            navigate('/');
+            await registerUser(username, password);
+            navigate('/login');
         } catch (error) {
-            console.error('Login failed:', error);
+            console.error('Signup failed:', error);
         }
     };
 
     return (
-        <div className="login-container">
-            <div className="login-card">
-                <h2>Login</h2>
+        <div className="signup-container">
+            <div className="signup-card">
+                <h2>Sign Up</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
@@ -47,14 +45,14 @@ const Login = () => {
                             required
                         />
                     </div>
-                    <button type="submit" className="login-button">Login</button>
+                    <button type="submit" className="signup-button">Sign Up</button>
                 </form>
-                <div className="login-footer">
-                    <p>Don't have an account? <a href="/signup">Sign up</a></p>
+                <div className="signup-footer">
+                    <p>Already have an account? <a href="/login">Login</a></p>
                 </div>
             </div>
         </div>
     );
 };
 
-export default Login;
+export default Signup;

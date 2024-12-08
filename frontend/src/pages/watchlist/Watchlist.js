@@ -1,4 +1,4 @@
-// src/pages/Watchlist.js
+
 import React from 'react';
 import { useWatchlist } from '../Context/WatchListContext';
 import MovieCard from '../../component/MovieCard/MovieCard';

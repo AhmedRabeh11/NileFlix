@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom'; 
 import { useReviews } from '../Context/ReviewsContext'; 
+import { fetchMovieDetails } from '../../services/api'; // Import the API function
 import './MovieDetails.css';
-
-const API_KEY = '11c7aba54522527e7f5806af9ca802a7'; 
 
 const MovieDetails = () => {
     const { id } = useParams(); 
-    const [movie, setMovie] = useState(null);
+    console.log('MovieDetails id:', id); // Debugging line
+
+    const [movie, setMovie] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { reviews, addReview } = useReviews();
@@ -15,14 +16,16 @@ const MovieDetails = () => {
     const [rating, setRating] = useState(0);
 
     useEffect(() => {
-        const fetchMovieDetails = async () => {
+        const fetchMovieData = async () => {
             try {
-                const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US&append_to_response=videos,credits`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch movie details');
+                const movieData = await fetchMovieDetails(id); // Fetch movie details from backend
+                console.log('Fetched movie data:', movieData); // Debugging line
+                if (movieData && typeof movieData === 'object') {
+                    const actorsWithImages = movieData.actors.filter(actor => actor.photo);
+                    setMovie({ ...movieData, actors: actorsWithImages });
+                } else {
+                    console.error('Error: Expected an object for movie details');
                 }
-                const data = await response.json();
-                setMovie(data);
                 setLoading(false);
             } catch (error) {
                 setError(error.message);
@@ -30,7 +33,7 @@ const MovieDetails = () => {
             }
         };
 
-        fetchMovieDetails();
+        fetchMovieData();
     }, [id]);
 
     const handleReviewSubmit = (e) => {
@@ -38,6 +41,20 @@ const MovieDetails = () => {
         addReview(id, { text: newReview, rating });
         setNewReview('');
         setRating(0);
+    };
+
+    const formatReleaseDate = (dateString) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    };
+
+    const formatDuration = (runtime) => {
+        if (runtime) {
+            const hours = Math.floor(runtime / 60);
+            const minutes = runtime % 60;
+            return `${hours}h ${minutes}m`;
+        }
+        return 'N/A';
     };
 
     if (loading) {
@@ -55,14 +72,14 @@ const MovieDetails = () => {
     return (
         <div className="movie-details">
             <div className="movie-header">
-                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} className="movie-poster" />
+                <img src={movie.posterImage} alt={movie.title} className="movie-poster" />
                 <div className="movie-info">
                     <h1>{movie.title}</h1>
-                    <p>{movie.release_date} • {movie.runtime} min</p>
-                    <p>⭐ {movie.vote_average}/10</p>
+                    <p>{formatReleaseDate(movie.releaseDate)} • {formatDuration(movie.runtime)}</p>
+                    <p>⭐ {movie.rating}/10</p>
                     <div className="genres">
-                        {movie.genres.map((genre) => (
-                            <span key={genre.id} className="genre">{genre.name}</span>
+                        {movie.genres.split(', ').map((genre, index) => (
+                            <span key={index} className="genre">{genre}</span>
                         ))}
                     </div>
                     <p>{movie.overview}</p>
@@ -73,26 +90,32 @@ const MovieDetails = () => {
                 <p>{movie.overview}</p>
             </div>
             <div className="movie-trailer">
-                {movie.videos.results.length > 0 && (
-                    <iframe
-                        width="560"
-                        height="315"
-                        src={`https://www.youtube.com/embed/${movie.videos.results[0].key}`}
-                        title="YouTube video player"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                    ></iframe>
+                <h2>Trailers</h2>
+                {movie.trailers && movie.trailers.length > 0 ? (
+                    movie.trailers.map((trailer) => (
+                        <iframe
+                            key={trailer.id}
+                            width="560"
+                            height="315"
+                            src={`https://www.youtube.com/embed/${trailer.key}`}
+                            title="YouTube video player"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        ></iframe>
+                    ))
+                ) : (
+                    <p>No trailers available</p>
                 )}
             </div>
             <div className="movie-cast">
                 <h2>Cast</h2>
                 <div className="cast-images">
-                    {movie.credits.cast.slice(0, 5).map((cast) => (
-                        <div key={cast.id} className="cast-member">
-                            <Link to={`/actor-details/${cast.id}`}>
-                                <img src={`https://image.tmdb.org/t/p/w200${cast.profile_path}`} alt={cast.name} className="cast-image" />
-                                <p>{cast.name}</p>
+                    {movie.actors && movie.actors.map((actor) => (
+                        <div key={actor.tmdbId} className="cast-member">
+                            <Link to={`/actor-details/${actor.tmdbId}`}>
+                                <img src={actor.photo} alt={actor.name} className="cast-image" />
+                                <p>{actor.name}</p>
                             </Link>
                         </div>
                     ))}

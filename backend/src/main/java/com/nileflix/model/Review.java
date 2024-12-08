@@ -29,7 +29,7 @@ public class Review {
 
 
     @ManyToOne
-    @JoinColumn(name = "movie_id")
+    @JoinColumn(name = "movieId", referencedColumnName = "movieId")
     private Movie movie;
 }
 

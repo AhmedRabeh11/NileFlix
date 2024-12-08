@@ -1,5 +1,4 @@
 package com.nileflix.service;
-
 import com.nileflix.model.Review;
 import com.nileflix.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +9,12 @@ import java.util.*;
 
 @Service
 public class ReviewService {
+
     @Autowired
     private ReviewRepository reviewRepository;
 
     public List<Review> getReviewsByMovieId(Long movieId) {
-        return reviewRepository.findByMovieId(movieId);
+        return reviewRepository.findByMovie_MovieId(movieId);
     }
 
     public Review addReview(Review review) {

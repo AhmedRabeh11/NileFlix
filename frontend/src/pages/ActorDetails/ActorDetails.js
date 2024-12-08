@@ -27,7 +27,8 @@ const ActorDetails = () => {
                     throw new Error('Failed to fetch actor credits');
                 }
                 const creditsData = await creditsResponse.json();
-                setCredits(creditsData.cast);
+                const creditsWithImages = creditsData.cast.filter(credit => credit.poster_path);
+                setCredits(creditsWithImages);
 
                 setLoading(false);
             } catch (error) {
