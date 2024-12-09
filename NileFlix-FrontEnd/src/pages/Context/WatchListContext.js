@@ -7,29 +7,33 @@ export const useWatchlist = () => useContext(WatchlistContext);
 
 export const WatchlistProvider = ({ children }) => {
     const [watchlist, setWatchlist] = useState([]);
-    const userId = 'user123'; // Replace with actual user ID
 
     useEffect(() => {
         const loadWatchlist = async () => {
             try {
-                const watchlistData = await fetchWatchlist(userId);
-                setWatchlist(watchlistData.map(item => ({
-                    id: item.movie.movieId,
-                    title: item.movie.title,
-                    image: item.movie.posterImage,
-                    rating: item.movie.rating
-                })));
+                const watchlistData = await fetchWatchlist();
+                console.log('Watchlist data:', watchlistData); // Debugging line
+                if (Array.isArray(watchlistData)) {
+                    setWatchlist(watchlistData.map(item => ({
+                        id: item.movie.movieId,
+                        title: item.movie.title,
+                        image: item.movie.posterImage,
+                        rating: item.movie.rating
+                    })));
+                } else {
+                    console.error('Error: Expected an array of watchlist items');
+                }
             } catch (error) {
                 console.error('Error loading watchlist:', error);
             }
         };
 
         loadWatchlist();
-    }, [userId]);
+    }, []);
 
     const handleAddToWatchlist = async (movie) => {
         try {
-            await addToWatchlist(userId, movie.id);
+            await addToWatchlist(movie.id);
             setWatchlist((prevWatchlist) => [...prevWatchlist, movie]);
         } catch (error) {
             console.error('Error adding to watchlist:', error);
@@ -38,7 +42,7 @@ export const WatchlistProvider = ({ children }) => {
 
     const handleRemoveFromWatchlist = async (movieId) => {
         try {
-            await removeFromWatchlist(userId, movieId);
+            await removeFromWatchlist(movieId);
             setWatchlist((prevWatchlist) => prevWatchlist.filter(movie => movie.id !== movieId));
         } catch (error) {
             console.error('Error removing from watchlist:', error);
