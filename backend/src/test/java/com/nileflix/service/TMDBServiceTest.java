@@ -1,5 +1,8 @@
 package com.nileflix.service;
 
+import com.nileflix.dto.TMDBGenreResponse;
+import com.nileflix.dto.TMDBMovieResponse;
+import com.nileflix.dto.TMDBVideoResponse;
 import com.nileflix.model.Actor;
 import com.nileflix.model.Movie;
 import com.nileflix.model.Trailer;
@@ -13,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.web.client.RestTemplate;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
@@ -80,8 +84,10 @@ class TMDBServiceTest {
         Trailer trailer = new Trailer();
         trailer.setKey("trailer_key");
 
-        // Mock the response from the TMDB API
-        // Add your mock implementation here
+        TMDBVideoResponse videoResponse = new TMDBVideoResponse();
+        videoResponse.setResults(List.of(TMDBVideoResponse.Video.builder().key("trailer_key").type("Trailer").build()));
+
+        when(restTemplate.getForObject(anyString(), eq(TMDBVideoResponse.class))).thenReturn(videoResponse);
 
         // Call the method
         List<Trailer> trailers = tmdbService.fetchAndStoreTrailers(tmdbId, movie);
@@ -92,31 +98,45 @@ class TMDBServiceTest {
         assertEquals("trailer_key", trailers.get(0).getKey());
     }
 
-    /*@Test
-    void testFetchGenres() {
-        // Mock the response from the TMDB API
-        // Add your mock implementation here
+    @Test
+    void testFetchGenres() throws Exception {
+        TMDBGenreResponse genreResponse = new TMDBGenreResponse();
+        genreResponse.setGenres(List.of(TMDBGenreResponse.Genre.builder().id(1).name("Action").build()));
+
+        when(restTemplate.getForObject(anyString(), eq(TMDBGenreResponse.class))).thenReturn(genreResponse);
+
+        // Use reflection to access the private method
+        Method fetchGenresMethod = TMDBService.class.getDeclaredMethod("fetchGenres");
+        fetchGenresMethod.setAccessible(true);
 
         // Call the method
-        Map<Integer, String> genres = tmdbService.fetchGenres();
+        Map<Integer, String> genres = (Map<Integer, String>) fetchGenresMethod.invoke(tmdbService);
 
         // Verify the interactions and assertions
         assertNotNull(genres);
         assertFalse(genres.isEmpty());
+        assertEquals("Action", genres.get(1));
     }
 
     @Test
-    void testFetchMovieRuntime() {
+    void testFetchMovieRuntime() throws Exception {
         Long tmdbId = 1L;
 
-        // Mock the response from the TMDB API
-        // Add your mock implementation here
+        TMDBMovieResponse.MovieData movieData = new TMDBMovieResponse.MovieData();
+        movieData.setRuntime(120);
+
+        when(restTemplate.getForObject(anyString(), eq(TMDBMovieResponse.MovieData.class))).thenReturn(movieData);
+
+        // Use reflection to access the private method
+        Method fetchMovieRuntimeMethod = TMDBService.class.getDeclaredMethod("fetchMovieRuntime", Long.class);
+        fetchMovieRuntimeMethod.setAccessible(true);
 
         // Call the method
-        Integer runtime = tmdbService.fetchMovieRuntime(tmdbId);
+        Integer runtime = (Integer) fetchMovieRuntimeMethod.invoke(tmdbService, tmdbId);
 
         // Verify the interactions and assertions
         assertNotNull(runtime);
         assertTrue(runtime > 0);
-    }*/
+        assertEquals(120, runtime);
+    }
 }
