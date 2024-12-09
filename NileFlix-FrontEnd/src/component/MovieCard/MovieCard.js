@@ -4,6 +4,8 @@ import { useWatchlist } from '../../pages/Context/WatchListContext';
 import './MovieCard.css';
 
 const MovieCard = ({ id, title, image, rating }) => {
+    console.log('MovieCard id:', id); // Debugging line
+
     const { watchlist, addToWatchlist, removeFromWatchlist } = useWatchlist();
     const isInWatchlist = watchlist.some(movie => movie.id === id);
 
