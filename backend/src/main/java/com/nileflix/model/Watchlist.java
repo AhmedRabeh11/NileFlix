@@ -19,6 +19,4 @@ public class Watchlist {
     @ManyToOne
     @JoinColumn(name = "movieId", referencedColumnName = "movieId")
     private Movie movie;
-
-    private String userId; // Assuming you have user management
 }
