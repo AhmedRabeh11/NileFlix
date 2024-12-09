@@ -1,6 +1,5 @@
 package com.nileflix.model;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +18,7 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String author;
+    private String author; // Add this field
 
     private String content;
 
@@ -27,10 +26,7 @@ public class Review {
 
     private Integer rating;
 
-
     @ManyToOne
     @JoinColumn(name = "movieId", referencedColumnName = "movieId")
     private Movie movie;
 }
-
-
