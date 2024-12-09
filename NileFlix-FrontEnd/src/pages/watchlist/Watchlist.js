@@ -1,11 +1,20 @@
 // src/pages/Watchlist.js
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useWatchlist } from '../Context/WatchListContext';
+import { useAuth } from '../Context/AuthContext';
 import MovieCard from '../../component/MovieCard/MovieCard';
 import './Watchlist.css';
 
 const Watchlist = () => {
     const { watchlist } = useWatchlist();
+    const { user } = useAuth();
+    const navigate = useNavigate();
+
+    if (!user) {
+        navigate('/login');
+        return null;
+    }
 
     return (
         <div className="watchlist">

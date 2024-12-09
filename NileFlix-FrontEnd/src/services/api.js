@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_BASE_URL = 'http://localhost:8080/api'; // Your Spring Boot backend URL
 
 const username = 'user'; // Replace with your username
-const password = 'e6dc6e9a-5eef-42b7-a23f-a115f76bb41d'; // Replace with the password provided by Spring Boot
+const password = '5f6eca93-d8b1-4e62-b5ee-b99735efdf55'; // Replace with the password provided by Spring Boot
 
 const authHeader = `Basic ${btoa(`${username}:${password}`)}`;
 
@@ -61,13 +61,9 @@ export const fetchMovieDetails = async (id) => {
     }
 };
 
-export const fetchWatchlist = async (userId) => {
+export const fetchWatchlist = async () => {
     try {
-        const response = await axios.get(`${API_BASE_URL}/watchlist/${userId}`, {
-            headers: {
-                'Authorization': authHeader
-            }
-        });
+        const response = await axios.get(`${API_BASE_URL}/watchlist`);
         console.log('Fetched watchlist:', response.data); // Debugging line
         return response.data;
     } catch (error) {
@@ -76,13 +72,9 @@ export const fetchWatchlist = async (userId) => {
     }
 };
 
-export const addToWatchlist = async (userId, movieId) => {
+export const addToWatchlist = async (movieId) => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/watchlist/${userId}/${movieId}`, {}, {
-            headers: {
-                'Authorization': authHeader
-            }
-        });
+        const response = await axios.post(`${API_BASE_URL}/watchlist/${movieId}`);
         console.log('Added to watchlist:', response.data); // Debugging line
         return response.data;
     } catch (error) {
@@ -91,13 +83,9 @@ export const addToWatchlist = async (userId, movieId) => {
     }
 };
 
-export const removeFromWatchlist = async (userId, movieId) => {
+export const removeFromWatchlist = async (movieId) => {
     try {
-        await axios.delete(`${API_BASE_URL}/watchlist/${userId}/${movieId}`, {
-            headers: {
-                'Authorization': authHeader
-            }
-        });
+        await axios.delete(`${API_BASE_URL}/watchlist/${movieId}`);
         console.log('Removed from watchlist'); // Debugging line
     } catch (error) {
         console.error('Error removing from watchlist:', error);
