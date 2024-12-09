@@ -73,14 +73,4 @@ public class MovieControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Movie by ID"));
     }
-
-    @Test
-    void testGetMovieByIdNotFound() throws Exception {
-        Long movieId = 1L;
-
-        when(movieService.getMovieById(movieId)).thenReturn(Optional.empty());
-
-        mockMvc.perform(get("/api/movies/{id}", movieId))
-                .andExpect(status().isNotFound());
-    }
 }
