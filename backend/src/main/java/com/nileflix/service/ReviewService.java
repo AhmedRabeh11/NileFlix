@@ -1,9 +1,9 @@
 package com.nileflix.service;
+
 import com.nileflix.model.Review;
 import com.nileflix.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import java.util.*;
 
@@ -22,5 +22,3 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
 }
-
-
