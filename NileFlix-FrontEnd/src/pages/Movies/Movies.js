@@ -1,41 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import MovieList from '../../component/Navbar/MovieList';
+import { fetchMovies } from '../../services/api'; // Import the API function
 import './Movies.css';
-
-const API_KEY = '11c7aba54522527e7f5806af9ca802a7'; // Your TMDb API key
-const DIRECTOR_IDS = ['1115944', '1186523', '2002988', '226425','2613122']; // Replace with actual director IDs
 
 const Movies = ({ searchQuery }) => {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
-        const fetchMovies = async () => {
+        const fetchMoviesData = async () => {
             try {
-                const moviePromises = DIRECTOR_IDS.map((directorId) =>
-                    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=ar&with_crew=${directorId}&sort_by=vote_average.desc`)
-                        .then((response) => {
-                            if (!response.ok) {
-                                throw new Error('Failed to fetch movies');
-                            }
-                            return response.json();
-                        })
-                );
-
-                const movieResults = await Promise.all(moviePromises);
-                const combinedMovies = movieResults.flatMap((result) => result.results);
-                const uniqueMovies = Array.from(new Set(combinedMovies.map((movie) => movie.id)))
-                    .map((id) => combinedMovies.find((movie) => movie.id === id));
-
-                // Filter out movies without posters
-                const moviesWithPosters = uniqueMovies.filter(movie => movie.poster_path);
-
-                setMovies(moviesWithPosters); // Set the filtered movies to the state
+                const moviesData = await fetchMovies(); // Fetch movies from backend
+                console.log('Movies data:', moviesData); // Debugging line
+                if (Array.isArray(moviesData)) {
+                    const moviesWithPosters = moviesData.filter(movie => movie.posterImage);
+                    setMovies(moviesWithPosters);
+                } else {
+                    console.error('Error: Expected an array of movies');
+                }
             } catch (error) {
                 console.error('Error fetching movies:', error);
             }
         };
 
-        fetchMovies();
+        fetchMoviesData();
     }, []);
 
     return (

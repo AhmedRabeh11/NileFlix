@@ -12,11 +12,11 @@ const MovieList = ({ movies, searchQuery }) => {
         <div className="movie-list">
             {filteredMovies.map(movie => (
                 <MovieCard
-                    key={movie.id}
-                    id={movie.id}
+                    key={movie.movieId}
+                    id={movie.movieId}
                     title={movie.title}
-                    image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    rating={movie.vote_average}
+                    image={movie.posterImage}
+                    rating={movie.rating}
                 />
             ))}
         </div>
