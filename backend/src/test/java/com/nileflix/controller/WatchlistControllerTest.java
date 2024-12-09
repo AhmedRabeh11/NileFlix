@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -35,41 +34,36 @@ public class WatchlistControllerTest {
 
     @Test
     void testGetWatchlist() throws Exception {
-        String userId = "user123";
         Watchlist watchlist = new Watchlist();
         watchlist.setId(1L);
-        watchlist.setUserId(userId);
 
-        when(watchlistService.getWatchlistByUserId(userId)).thenReturn(List.of(watchlist));
+        when(watchlistService.getWatchlist()).thenReturn(List.of(watchlist));
 
-        mockMvc.perform(get("/api/watchlist/{userId}", userId))
+        mockMvc.perform(get("/api/watchlist"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].userId").value(userId));
+                .andExpect(jsonPath("$[0].id").value(1L));
     }
 
     @Test
     void testAddToWatchlist() throws Exception {
-        String userId = "user123";
         Long movieId = 1L;
         Watchlist watchlist = new Watchlist();
         watchlist.setId(1L);
-        watchlist.setUserId(userId);
 
-        when(watchlistService.addToWatchlist(userId, movieId)).thenReturn(watchlist);
+        when(watchlistService.addToWatchlist(movieId)).thenReturn(watchlist);
 
-        mockMvc.perform(post("/api/watchlist/{userId}/{movieId}", userId, movieId))
+        mockMvc.perform(post("/api/watchlist/{movieId}", movieId))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.userId").value(userId));
+                .andExpect(jsonPath("$.id").value(1L));
     }
 
     @Test
     void testRemoveFromWatchlist() throws Exception {
-        String userId = "user123";
         Long movieId = 1L;
 
-        doNothing().when(watchlistService).removeFromWatchlist(userId, movieId);
+        doNothing().when(watchlistService).removeFromWatchlist(movieId);
 
-        mockMvc.perform(delete("/api/watchlist/{userId}/{movieId}", userId, movieId))
+        mockMvc.perform(delete("/api/watchlist/{movieId}", movieId))
                 .andExpect(status().isOk());
     }
 }
