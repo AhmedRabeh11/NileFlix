@@ -4,6 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
+./frontend/node_modules
+**/node_modules/
+**/node_modules/**
 
 # testing
 /coverage
@@ -24,3 +27,4 @@ yarn-error.log*
 
 # IDEs
 .idea/
+.vscode/
