@@ -49,5 +49,5 @@ public class ReviewControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].content").value("Great movie!"));
     }
-    
+
 }
