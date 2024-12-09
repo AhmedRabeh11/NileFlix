@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../pages/Context/AuthContext';
 import './Navbar.css';
 
 const Navbar = ({ setSearchQuery }) => {
+    const { user, logout } = useAuth();
+
     const handleSearchChange = (event) => {
         setSearchQuery(event.target.value);
     };
@@ -23,8 +26,14 @@ const Navbar = ({ setSearchQuery }) => {
                 onChange={handleSearchChange}
             />
             <div className="navbar-actions">
-                <Link to="/login" className="navbar-icon">User</Link>
-                <span className="navbar-icon">🇪🇬</span>
+                {user ? (
+                    <>
+                        <span className="navbar-icon">{user.username}</span>
+                        <button onClick={logout} className="navbar-icon">Logout</button>
+                    </>
+                ) : (
+                    <Link to="/login" className="navbar-icon">Login</Link>
+                )}
             </div>
         </nav>
     );
