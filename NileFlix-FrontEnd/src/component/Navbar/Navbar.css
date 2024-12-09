@@ -43,7 +43,13 @@
 }
 
 .navbar-icon {
+    text-decoration: none; /* Remove underline */
+    color: #fff; /* Set color to white */
     cursor: pointer;
+}
+
+.navbar-icon:hover {
+    color: #d4af37; /* Change color on hover */
 }
 
 .navbar-logo {

@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_BASE_URL = 'http://localhost:8080/api'; // Your Spring Boot backend URL
 
 const username = 'user'; // Replace with your username
-const password = 'c48b03ef-cddd-45b3-a463-e93ea74bafee'; // Replace with the password provided by Spring Boot
+const password = 'e6dc6e9a-5eef-42b7-a23f-a115f76bb41d'; // Replace with the password provided by Spring Boot
 
 const authHeader = `Basic ${btoa(`${username}:${password}`)}`;
 
