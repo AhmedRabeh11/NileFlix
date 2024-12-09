@@ -11,7 +11,6 @@ import Signup from './pages/Signup/Signup';
 import ActorDetails from './pages/ActorDetails/ActorDetails';
 import { WatchlistProvider } from './pages/Context/WatchListContext';
 import { ReviewsProvider } from './pages/Context/ReviewsContext';
-
 //import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -32,6 +31,7 @@ const App = () => {
                         <Route path="/watchlist" element={<Watchlist />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/signup" element={<Signup />} />
+
                     </Routes>
                 </Router>
             </WatchlistProvider>
