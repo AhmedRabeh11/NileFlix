@@ -43,8 +43,8 @@ const About = () => {
                 <p>If you have any questions or feedback, feel free to reach out to us:</p>
                 <ul>
                     <li>Email: support@nileflix.com</li>
-                    <li>Phone: +1 (555) 123-4567</li>
-                    <li>Address: 123 NileFlix St, Movie City, CA 12345</li>
+                    <li>Phone: +36 70 947 645 7 </li>
+                    <li>Address: Debrecen Hungart , 4026 Csemete Utca</li>
                 </ul>
             </section>
         </div>
