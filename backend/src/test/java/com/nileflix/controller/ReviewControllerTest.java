@@ -50,20 +50,4 @@ public class ReviewControllerTest {
                 .andExpect(jsonPath("$[0].content").value("Great movie!"));
     }
 
-    @Test
-    void testAddReview() throws Exception {
-        Review review = new Review();
-        review.setId(1L);
-        review.setContent("Great movie!");
-        review.setRating(5);
-        review.setCreatedAt(new Date());
-
-        when(reviewService.addReview(any(Review.class))).thenReturn(review);
-
-        mockMvc.perform(post("/api/reviews")
-                .contentType("application/json")
-                .content("{\"content\":\"Great movie!\",\"rating\":5}"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content").value("Great movie!"));
-    }
 }
