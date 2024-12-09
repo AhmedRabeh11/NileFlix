@@ -1,14 +1,8 @@
 package com.nileflix.service;
 
-import com.nileflix.dto.TMDBGenreResponse;
-import com.nileflix.dto.TMDBMovieResponse;
-import com.nileflix.dto.TMDBVideoResponse;
-import com.nileflix.model.Actor;
-import com.nileflix.model.Movie;
-import com.nileflix.model.Trailer;
-import com.nileflix.repository.ActorRepository;
-import com.nileflix.repository.MovieRepository;
-import com.nileflix.repository.TrailerRepository;
+import com.nileflix.dto.*;
+import com.nileflix.model.*;
+import com.nileflix.repository.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -48,24 +42,27 @@ class TMDBServiceTest {
     @Test
     void testFetchAndStoreEgyptianMovies() {
         // Mock the response from the TMDB API
-        // Add your mock implementation here
+        TMDBMovieResponse movieResponse = new TMDBMovieResponse();
+        movieResponse.setResults(List.of(TMDBMovieResponse.MovieData.builder().id(1L).title("Movie Title").build()));
+        movieResponse.setTotalPages(1);
+
+        when(restTemplate.getForObject(anyString(), eq(TMDBMovieResponse.class))).thenReturn(movieResponse);
 
         // Call the method
         String result = tmdbService.fetchAndStoreEgyptianMovies();
 
         // Verify the interactions and assertions
         assertEquals("Movies fetched and stored successfully", result);
+        verify(movieRepository, times(1)).saveAll(anyList());
     }
 
     @Test
     void testFetchAndStoreActors() {
         Long tmdbId = 1L;
-        Actor actor = new Actor();
-        actor.setTmdbId(tmdbId);
-        actor.setName("Actor Name");
+        TMDBCreditsResponse creditsResponse = new TMDBCreditsResponse();
+        creditsResponse.setCast(List.of(TMDBCreditsResponse.CastMember.builder().id(1L).name("Actor Name").build()));
 
-        // Mock the response from the TMDB API
-        // Add your mock implementation here
+        when(restTemplate.getForObject(anyString(), eq(TMDBCreditsResponse.class))).thenReturn(creditsResponse);
 
         // Call the method
         List<Actor> actors = tmdbService.fetchAndStoreActors(tmdbId);
@@ -74,6 +71,7 @@ class TMDBServiceTest {
         assertNotNull(actors);
         assertEquals(1, actors.size());
         assertEquals("Actor Name", actors.get(0).getName());
+        verify(actorRepository, times(1)).saveAll(anyList());
     }
 
     @Test
@@ -81,9 +79,6 @@ class TMDBServiceTest {
         Long tmdbId = 1L;
         Movie movie = new Movie();
         movie.setTmdbId(tmdbId);
-        Trailer trailer = new Trailer();
-        trailer.setKey("trailer_key");
-
         TMDBVideoResponse videoResponse = new TMDBVideoResponse();
         videoResponse.setResults(List.of(TMDBVideoResponse.Video.builder().key("trailer_key").type("Trailer").build()));
 
@@ -96,6 +91,7 @@ class TMDBServiceTest {
         assertNotNull(trailers);
         assertEquals(1, trailers.size());
         assertEquals("trailer_key", trailers.get(0).getKey());
+        verify(trailerRepository, times(1)).saveAll(anyList());
     }
 
     @Test
@@ -121,7 +117,6 @@ class TMDBServiceTest {
     @Test
     void testFetchMovieRuntime() throws Exception {
         Long tmdbId = 1L;
-
         TMDBMovieResponse.MovieData movieData = new TMDBMovieResponse.MovieData();
         movieData.setRuntime(120);
 
