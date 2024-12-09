@@ -5,7 +5,7 @@ const About = () => {
     return (
         <div className="about-container">
             <h2>About Us</h2>
-            <p>Welcome to NileFlix! We are dedicated to bringing you the best movies and TV shows from around the world</p>
+            <p>Welcome to NileFlix ! We are dedicated to bringing you the best movies and TV shows from around the world</p>
             
             <section className="mission">
                 <h3>Our Mission</h3>
