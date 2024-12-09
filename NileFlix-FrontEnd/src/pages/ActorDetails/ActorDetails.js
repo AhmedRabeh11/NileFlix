@@ -6,7 +6,7 @@ import './ActorDetails.css';
 const API_KEY = '11c7aba54522527e7f5806af9ca802a7'; // Your TMDb API key
 
 const ActorDetails = () => {
-    const { id } = useParams(); 
+    const { id } = useParams(); // Get the actor ID from the URL
     const [actor, setActor] = useState(null);
     const [credits, setCredits] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -27,7 +27,8 @@ const ActorDetails = () => {
                     throw new Error('Failed to fetch actor credits');
                 }
                 const creditsData = await creditsResponse.json();
-                setCredits(creditsData.cast);
+                const creditsWithImages = creditsData.cast.filter(credit => credit.poster_path);
+                setCredits(creditsWithImages);
 
                 setLoading(false);
             } catch (error) {
