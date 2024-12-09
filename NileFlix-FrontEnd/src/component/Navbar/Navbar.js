@@ -28,7 +28,7 @@ const Navbar = ({ setSearchQuery }) => {
             <div className="navbar-actions">
                 {user ? (
                     <>
-                        <span className="navbar-icon">{user.username}</span>
+                        <span className="navbar-icon">Hello {user.username}</span>
                         <button onClick={logout} className="navbar-icon">Logout</button>
                     </>
                 ) : (
