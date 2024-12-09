@@ -11,31 +11,31 @@ import Signup from './pages/Signup/Signup';
 import ActorDetails from './pages/ActorDetails/ActorDetails';
 import { WatchlistProvider } from './pages/Context/WatchListContext';
 import { ReviewsProvider } from './pages/Context/ReviewsContext';
-//import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { AuthProvider } from './pages/Context/AuthContext'; // Import AuthProvider
 
 const App = () => {
     const [searchQuery, setSearchQuery] = useState('');
 
     return (
-        <ReviewsProvider>
-            <WatchlistProvider>
-                <Router>
-                    <Navbar setSearchQuery={setSearchQuery} />
-                    <Routes>
-                        <Route path="/" element={<Home searchQuery={searchQuery} />} />
-                        <Route path="/movies" element={<Movies searchQuery={searchQuery} />} />
-                        <Route path="/about" element={<About />} />
-                        <Route path="/movie-details/:id" element={<MovieDetails />} />
-                        <Route path="/actor-details/:id" element={<ActorDetails />} />
-                        <Route path="/watchlist" element={<Watchlist />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/signup" element={<Signup />} />
-
-                    </Routes>
-                </Router>
-            </WatchlistProvider>
-        </ReviewsProvider>
+        <AuthProvider>
+            <ReviewsProvider>
+                <WatchlistProvider>
+                    <Router>
+                        <Navbar setSearchQuery={setSearchQuery} />
+                        <Routes>
+                            <Route path="/" element={<Home searchQuery={searchQuery} />} />
+                            <Route path="/movies" element={<Movies searchQuery={searchQuery} />} />
+                            <Route path="/about" element={<About />} />
+                            <Route path="/movie-details/:id" element={<MovieDetails />} />
+                            <Route path="/actor-details/:id" element={<ActorDetails />} />
+                            <Route path="/watchlist" element={<Watchlist />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/signup" element={<Signup />} />
+                        </Routes>
+                    </Router>
+                </WatchlistProvider>
+            </ReviewsProvider>
+        </AuthProvider>
     );
 };
 
