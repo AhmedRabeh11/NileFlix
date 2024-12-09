@@ -15,18 +15,18 @@ public class WatchlistController {
     @Autowired
     private WatchlistService watchlistService;
 
-    @GetMapping("/{userId}")
-    public List<Watchlist> getWatchlist(@PathVariable String userId) {
-        return watchlistService.getWatchlistByUserId(userId);
+    @GetMapping
+    public List<Watchlist> getWatchlist() {
+        return watchlistService.getWatchlist();
     }
 
-    @PostMapping("/{userId}/{movieId}")
-    public Watchlist addToWatchlist(@PathVariable String userId, @PathVariable Long movieId) {
-        return watchlistService.addToWatchlist(userId, movieId);
+    @PostMapping("/{movieId}")
+    public Watchlist addToWatchlist(@PathVariable Long movieId) {
+        return watchlistService.addToWatchlist(movieId);
     }
 
-    @DeleteMapping("/{userId}/{movieId}")
-    public void removeFromWatchlist(@PathVariable String userId, @PathVariable Long movieId) {
-        watchlistService.removeFromWatchlist(userId, movieId);
+    @DeleteMapping("/{movieId}")
+    public void removeFromWatchlist(@PathVariable Long movieId) {
+        watchlistService.removeFromWatchlist(movieId);
     }
 }
