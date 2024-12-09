@@ -1,22 +1,21 @@
 // src/pages/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../../services/api';
+import { useAuth } from '../../pages/Context/AuthContext';
 import './Login.css';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { login } = useAuth();
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        try {
-            const token = await loginUser(username, password);
-            localStorage.setItem('token', token);
+        if (login(username, password)) {
             navigate('/');
-        } catch (error) {
-            console.error('Login failed:', error);
+        } else {
+            alert('Invalid credentials');
         }
     };
 
