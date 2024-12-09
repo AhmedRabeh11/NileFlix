@@ -18,19 +18,18 @@ public class WatchlistService {
     @Autowired
     private MovieRepository movieRepository;
 
-    public List<Watchlist> getWatchlistByUserId(String userId) {
-        return watchlistRepository.findByUserId(userId);
+    public List<Watchlist> getWatchlist() {
+        return watchlistRepository.findAll();
     }
 
-    public Watchlist addToWatchlist(String userId, Long movieId) {
+    public Watchlist addToWatchlist(Long movieId) {
         Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new RuntimeException("Movie not found"));
         Watchlist watchlist = new Watchlist();
-        watchlist.setUserId(userId);
         watchlist.setMovie(movie);
         return watchlistRepository.save(watchlist);
     }
 
-    public void removeFromWatchlist(String userId, Long movieId) {
-        watchlistRepository.deleteByUserIdAndMovie_MovieId(userId, movieId);
+    public void removeFromWatchlist(Long movieId) {
+        watchlistRepository.deleteByMovie_MovieId(movieId);
     }
 }
