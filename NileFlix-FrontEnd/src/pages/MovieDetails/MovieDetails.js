@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom'; 
 import { useReviews } from '../Context/ReviewsContext'; 
+import { useAuth } from '../Context/AuthContext';
 import { fetchMovieDetails } from '../../services/api'; // Import the API function
 import './MovieDetails.css';
 
@@ -12,6 +13,7 @@ const MovieDetails = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { reviews, addReview } = useReviews();
+    const { user } = useAuth();
     const [newReview, setNewReview] = useState('');
     const [rating, setRating] = useState(0);
 
@@ -150,6 +152,7 @@ const MovieDetails = () => {
                 <div className="reviews-list">
                     {reviews[id]?.map((review, index) => (
                         <div key={index} className="review">
+                            <p><strong>{review.author}</strong></p>
                             <p>{review.text}</p>
                             <p>Rating: {review.rating}/10</p>
                         </div>
