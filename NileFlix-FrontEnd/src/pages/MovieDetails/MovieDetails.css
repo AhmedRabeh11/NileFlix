@@ -60,16 +60,31 @@ html, body {
     font-size: 0.9em;
 }
 
-.movie-trailer, .movie-cast, .movie-reviews {
+.movie-overview, .movie-cast, .movie-reviews {
     margin-bottom: 20px;
+}
+
+.movie-trailer {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center; /* Center the trailer */
+    align-items: center;
+    flex-direction: column;
+}
+
+.movie-trailer h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333; /* Darker text color */
 }
 
 .movie-trailer iframe {
     width: 100%;
-    max-width: 800px;
-    height: 450px;
+    max-width: 1200px; /* Set a maximum width for the trailer */
+    height: 675px; /* Maintain a 16:9 aspect ratio */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 20px;
 }
 
 .cast-images {
@@ -144,4 +159,28 @@ button:hover {
     border-radius: 5px;
     margin-bottom: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .movie-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .movie-poster {
+        width: 100%;
+        max-width: 300px;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .movie-info h1 {
+        font-size: 2em;
+    }
+
+    .movie-trailer iframe {
+        height: auto;
+        max-width: 100%;
+    }
 }
